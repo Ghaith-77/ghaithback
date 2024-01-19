@@ -24,10 +24,10 @@ let schema_books = mongoose.Schema(
         min:0,
         require:true
     },
-    Author: {
+    auth: {
       type: mongoose.Schema.Types.ObjectId,
+      ref: "auth",
       require: true,
-      ref: "Authors",
     },
   },
   {
