@@ -13,7 +13,7 @@ let { Books } = require("../modles/book");
 */
 
 router.get("/", async (req, res) => {
-    let books = await Books.find().populate("Authors")
+    let books = await Books.find().populate('auth')
     if (books) {
       res.status(200).json(books);
     } else {
