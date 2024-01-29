@@ -28,10 +28,10 @@ let schema_authors = mongoose.Schema(
     timestamps: true,
   }
 );
-let auth = mongoose.model("auth", schema_authors);
+let authe = mongoose.model("auth", schema_authors);
 
 module.exports = {
-  auth,
+  authe,
   validatepostauther,
   validateputauthers
 };

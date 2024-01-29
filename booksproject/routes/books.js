@@ -1,5 +1,6 @@
 let express = require("express");
 let asyncH = require("express-async-handler");
+let logger = require("../Middlewares/logger") 
 
 let router = express.Router();
 let { validatepostBooks, validateputBooks } = require("../modles/book");
@@ -12,7 +13,7 @@ let { Books } = require("../modles/book");
  
 */
 
-router.get("/", async (req, res) => {
+router.get("/",logger, async (req, res) => {
     let books = await Books.find().populate('auth')
     if (books) {
       res.status(200).json(books);
