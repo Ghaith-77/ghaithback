@@ -12,7 +12,8 @@ let {notFound,error} = require("./Middlewares/error")
 //paths
 let bookspath = require("./routes/books");
 let authorspath = require("./routes/auth");
-let userspath = require("./routes/users/usersAuth")
+let usersauthpath = require("./routes/users/usersAuth")
+let usermethod = require("./routes/users/usermethods")
 
 
 let mongoose = require("mongoose");
@@ -27,7 +28,9 @@ mongoose.connect(process.env.conect).then(() => {
 
 app.use("/books", bookspath);
 app.use("/auth", authorspath);
-app.use("/users", userspath);
+app.use("/users", usersauthpath);
+app.use("/usermethod",usermethod)
+
 
 
 app.use(notFound)

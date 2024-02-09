@@ -1,33 +1,37 @@
 let mongoose = require("mongoose");
 let joi = require("joi");
 
-let schema_user = mongoose.Schema({
-  username: {
-    type: String,
-    require: true,
-    trim: true,
-    minlength: 3,
-    maxlength: 20,
+let schema_user = mongoose.Schema(
+  {
+    username: {
+      type: String,
+      require: true,
+      trim: true,
+      minlength: 3,
+      maxlength: 20,
+    },
+    email: {
+      type: String,
+      require: true,
+      trim: true,
+      minlength: 3,
+      maxlength: 20,
+    },
+    password: {
+      type: String,
+      require: true,
+      trim: true,
+      minlength: 3,
+    },
+    isAdmin: {
+      type: Boolean,
+      require: false,
+    },
   },
-  email: {
-    type: String,
-    require: true,
-    trim: true,
-    minlength: 3,
-    maxlength: 20,
-  },
-  password: {
-    type: String,
-    require: true,
-    trim: true,
-    minlength: 3,
-    maxlength: 20,
-  },
-  isAdmin: {
-    type: Boolean,
-    require: false,
-  },
-});
+  {
+    timestamps: true,
+  }
+);
 let usermodel = mongoose.model("user", schema_user);
 
 module.exports = {
@@ -48,7 +52,7 @@ function validateRegisterusers(obj) {
     username: joi.string().trim().required(),
     email: joi.string().trim().required(),
     password: joi.string().trim().required(),
-    isAdmin: joi.boolean()
+    isAdmin: joi.boolean(),
   });
   return schema.validate(obj);
 }
