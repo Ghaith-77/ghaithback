@@ -3,9 +3,9 @@ let router = express.Router();
 let asyncH = require("express-async-handler");
 let bcryptjs = require("bcryptjs");
 let { usermodel, validatePutusers } = require("../../modles/usermodel");
-
+let {virfiytoken,virfiytokenandauthoris,isadmin} = require("../../Middlewares/virfiytoken")
 router.put(
-  "/:id",
+  "/:id",virfiytokenandauthoris,
   asyncH(async (req, res) => {
     let { error } = validatePutusers(req.body);
     if (error) {
