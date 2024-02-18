@@ -25,7 +25,7 @@ let schema_user = mongoose.Schema(
     },
     isAdmin: {
       type: Boolean,
-      require: false,
+      default: false,
     },
   },
   {
@@ -52,7 +52,6 @@ function validateRegisterusers(obj) {
     username: joi.string().trim().required(),
     email: joi.string().trim().required(),
     password: joi.string().trim().required(),
-    isAdmin: joi.boolean(),
   });
   return schema.validate(obj);
 }

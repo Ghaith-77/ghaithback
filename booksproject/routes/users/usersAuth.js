@@ -28,7 +28,7 @@ router.post(
       username: req.body.username,
       email: req.body.email,
       password: req.body.password,
-      isAdmin: req.body.isAdmin,
+      
     });
 
     let resulte = await newUser.save();

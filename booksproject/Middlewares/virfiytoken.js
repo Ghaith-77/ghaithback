@@ -19,23 +19,28 @@ function virfiytoken (req,res,next){
 
 function virfiytokenandauthoris (req,res,next){
     virfiytoken(req,res,()=>{
-        if(req.user.id == req.params.id ||req.user. isAdmin){
+        if(req.user.id == req.params.id || req.user.isadmin){
+            console.log(req.user.isAdmin);
             next()
         }else{
+            console.log(req.user.isAdmin);
             return res.status(403).json({massege:"not authorise"})
         }
     })
 }
 
-function isadmin (req,res,next){
-    if( req.user.isAdmin ){
-        next()
-    }else{
-        return res.status(403).json({massege:"you not admin"})
-    }
+function verfiyandisadmin (req,res,next){
+    virfiytoken(req,res,()=>{
+        if( req.user.isadmin ){
+            next()
+        }else{
+            return res.status(403).json({massege:"you not admin"})
+        }
+    })
+   
 }
 module.exports = {
     virfiytoken,
     virfiytokenandauthoris,
-    isadmin
+    verfiyandisadmin
 }

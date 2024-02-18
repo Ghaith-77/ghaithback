@@ -3,7 +3,9 @@ let router = express.Router();
 let asyncH = require("express-async-handler");
 let bcryptjs = require("bcryptjs");
 let { usermodel, validatePutusers } = require("../../modles/usermodel");
-let {virfiytoken,virfiytokenandauthoris,isadmin} = require("../../Middlewares/virfiytoken")
+let {virfiytokenandauthoris,verfiyandisadmin} = require("../../Middlewares/virfiytoken")
+
+
 router.put(
   "/:id",virfiytokenandauthoris,
   asyncH(async (req, res) => {
@@ -27,6 +29,38 @@ router.put(
       { new: true }
     ).select("-password");
     res.status(200).json(userapdated)
+  })
+);
+router.get(
+  "/",verfiyandisadmin,
+  asyncH(async (req, res) => {
+    let users = await  usermodel.find().select("-password")
+    res.status(200).json(users)
+  })
+);
+
+
+router.get(
+  "/:id",virfiytokenandauthoris,
+  asyncH(async (req, res) => {
+    let user = await usermodel.findById(req.params.id).select("-password")
+    if(user){
+      res.status(200).json(user)
+    }else{
+      res.status(400).json({massege:"not found"})
+    }
+  })
+);
+router.delete(
+  "/:id",virfiytokenandauthoris,
+  asyncH(async (req, res) => {
+    let user = await usermodel.findById(req.params.id).select("-password")
+    if(user){
+      await user.findByIdAndDelete(req.params.id)
+      res.status(200).json({massege:"user deleted"})
+    }else{
+      res.status(400).json({massege:"not found"})
+    }
   })
 );
 module.exports = router;
