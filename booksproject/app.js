@@ -2,34 +2,27 @@ let express = require("express");
 let app = express();
 app.use(express.json());
 
-let env = require("dotenv")
+require("dotenv").config()
 let joi = require("joi");
-env.config()
+
 
 //middelweres
 let logger = require("./Middlewares/logger") 
 let {notFound,error} = require("./Middlewares/error") 
-//paths
-let bookspath = require("./routes/books");
-let authorspath = require("./routes/auth");
-let usersauthpath = require("./routes/users/usersAuth")
-let usermethod = require("./routes/users/usermethods")
 
+let Dbconnect = require("./Middlewares/dbConect")
 
-let mongoose = require("mongoose");
-mongoose.connect(process.env.conect).then(() => {
-  console.log("yazan horema");
-});
+Dbconnect()
 
 
 // app.use(logger)
 
 
 
-app.use("/books", bookspath);
-app.use("/auth", authorspath);
-app.use("/users", usersauthpath);
-app.use("/usermethod",usermethod)
+app.use("/books", require("./routes/books"));
+app.use("/auth",  require("./routes/auth"));
+app.use("/users",  require("./routes/users/usersAuth"));
+app.use("/usermethod", require("./routes/users/usermethods"))
 
 
 
