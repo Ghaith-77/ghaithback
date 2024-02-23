@@ -40,7 +40,7 @@ function validatepostBooks(obj) {
   let schema = joi.object({
     title: joi.string().trim().required(),
     descripion: joi.string().trim().required(),
-    auther: joi.string().required(),
+    auth: joi.string().required(),
     price: joi.number().required(),
     cover : joi.string().valid("hardcover", "sortcover")
   });
@@ -50,7 +50,7 @@ function validateputBooks(obj) {
   let schema = joi.object({
     title: joi.string().trim().required(),
     descripion: joi.string().trim().required(),
-    auther: joi.string().required(),
+    auth: joi.string().required(),
     price: joi.number().required(),
     cover : joi.string().valid("hardcover", "sortcover")
   });

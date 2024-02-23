@@ -6,24 +6,25 @@ let asyncH = require("express-async-handler");
 
 let { validatepostauther, validateputauthers } = require("../modles/auth");
 let { authe } = require("../modles/auth");
-let Authors = authe
+
 router.get("/", async (req, res) => {
   try {
-    let Authors = await Authors.find()
+    let Authors = await authe.find()
       .sort({ firstname: 1 })
       .select("firstname lastname ");
+      console.log(Authors);
     if (Authors) {
       res.status(200).json(Authors);
     } else {
-      res.status(400).send({ mas: "auther not found" });
+      res.status(400).json({ mas: "auther not found" });
     }
   } catch (e) {
-    res.status(400).send("no");
+    res.status(400).json({massege:"dsa"});
   }
 });
 router.get("/:id", async (req, res) => {
   try {
-    let Authors = await Authors.findById(req.params.id);
+    let Authors = await authe.findById(req.params.id);
     if (Authors) {
       res.status(200).json(Authors);
     } else {
@@ -40,7 +41,7 @@ router.post(
     if (error) {
       return res.status(400).json({ massege: error.details[0].message });
     }
-      let auther = new Authors();
+      let auther = new authe();
       auther.firstname = req.body.firstname;
       auther.lastname = req.body.lastname;
       auther.nashunality = req.body.nashunality;
@@ -56,7 +57,7 @@ router.put("/:id", async (req, res) => {
     return res.status(400).json({ massege: error.details[0].message });
   }
   try {
-    let Authors = await Authors.findByIdAndUpdate(
+    let Authors = await authe.findByIdAndUpdate(
       req.params.id,
       {
         $set: {
@@ -75,9 +76,9 @@ router.put("/:id", async (req, res) => {
 });
 router.delete("/:id", async (req, res) => {
   try {
-    let outher = await Authors.findById(req.params.id);
+    let outher = await authe.findById(req.params.id);
     if (outher) {
-      await Authors.findByIdAndDelete(req.params.id);
+      await authe.findByIdAndDelete(req.params.id);
       res.status(201).json({ massege: "auther has benn deleted" });
     } else {
       res.status(401).json({ massege: "auther has not  benn deleted" });

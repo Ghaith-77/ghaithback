@@ -45,7 +45,7 @@ router.post(
       let book = new Books();
       book.title = req.body.title;
       book.descripion = req.body.descripion;
-      book.auther = req.body.auther
+      book.auth = req.body.auth
       book.cover = req.body.cover;
       book.price =  req.body.price;
       book.save();
@@ -67,7 +67,7 @@ router.put("/:id", async (req, res) => {
           description: req.body.lastname,
           cover: req.body.nashunality,
           price: req.body.img,
-          auther: req.body.auther
+          auth: req.body.auth
         },
       },
       { new: true }
