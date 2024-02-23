@@ -5,8 +5,8 @@ let router = express.Router();
 let asyncH = require("express-async-handler");
 
 let { validatepostauther, validateputauthers } = require("../modles/auth");
-let { auth } = require("../modles/auth");
-let Authors = auth
+let { authe } = require("../modles/auth");
+let Authors = authe
 router.get("/", async (req, res) => {
   try {
     let Authors = await Auth.find()
