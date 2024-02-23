@@ -1,46 +1,19 @@
-const books = [
+const dataBooks = [
     {
       title: "Black Swan",
       author: "65aa3306a80237ced8766361",
-      description: "About Black Swan",
+      descripion: "About Black Swan",
       price: 10,
-      cover: "soft cover",
-    },
-    {
-      title: "Skin In The Game",
-      author: "65aa3306a80237ced8766361",
-      description: "About Skin In The Game",
-      price: 12,
-      cover: "soft cover",
-    },
-    {
-      title: "Fooled By Randomness",
-      author: "65aa3306a80237ced8766361",
-      description: "About Fooled By Randomness",
-      price: 8,
-      cover: "hard cover",
+      cover: "hardcover",
     },
     {
       title: "The Forty Rules Of Loves",
       author: "65d85a375b1f62df81affd7c",
       description: "About The Forty Rules Of Loves",
       price: 14,
-      cover: "soft cover",
-    },
-    {
-      title: "The Island Of Missing Trees",
-      author: "65d85a375b1f62df81affd7c",
-      description: "About The Island Of Missing Trees",
-      price: 9,
-      cover: "soft cover",
-    },
-    {
-      title: "The Flea Palace",
-      author: "65d85a375b1f62df81affd7c",
-      description: "About The Flea Palace",
-      price: 10,
-      cover: "hard cover",
-    },
+      cover: "hardcover",
+    }
+    
   ];
   
   const authors = [
@@ -69,6 +42,6 @@ const books = [
   
   
   module.exports = {
-    books,
+    dataBooks,
     authors
   };

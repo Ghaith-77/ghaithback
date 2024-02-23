@@ -9,7 +9,7 @@ let { authe } = require("../modles/auth");
 let Authors = authe
 router.get("/", async (req, res) => {
   try {
-    let Authors = await Auth.find()
+    let Authors = await Authors.find()
       .sort({ firstname: 1 })
       .select("firstname lastname ");
     if (Authors) {

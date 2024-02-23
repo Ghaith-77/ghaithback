@@ -15,7 +15,7 @@ let schema_books = mongoose.Schema(
     },
     cover: {
       type: String,
-      default: "ghaith",
+      default: "hardcover",
       trim: true,
       enum: ["hardcover", "sortcover"],
     },
@@ -57,7 +57,7 @@ function validateputBooks(obj) {
   return schema.validate(obj);
 }
 module.exports = {
-    Books,
+  Books,
   validatepostBooks,
   validateputBooks,
 };
