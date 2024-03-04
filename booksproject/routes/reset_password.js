@@ -14,12 +14,12 @@ router.post(
   "/sendforgotpasswordlink",
   asyncH((req, res) => {
     let user = usermodel.findOne({ email: req.body.email });
-    if(!user){
-        return res.status(404).json({massege : "email rong"})
+    if (!user) {
+      return res.status(404).json({ massege: "email rong" });
     }
-    let secretkey = process.env.secretkey + user.password
-    let token = jwt.sign({email:user.email,id})
-    console.log(req.body.email);
+    let secretkey = process.env.secretkey + user.password;
+    let token = jwt.sign({ email: user.email, id: user.id }, secretkey);
+    let link = `http://localhost:3000/reset_password`;
   })
 );
 module.exports = router;
