@@ -24,7 +24,7 @@ let schema_books = mongoose.Schema(
         min:0,
         require:true
     },
-    auth: {
+    author: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "auth",
       require: true,

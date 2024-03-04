@@ -8,11 +8,12 @@ let { validatepostauther, validateputauthers } = require("../modles/auth");
 let { authe } = require("../modles/auth");
 
 router.get("/", async (req, res) => {
+  let {skip,limit} = req.query
   try {
-    let Authors = await authe.find()
+    let Authors = await authe.find().skip(skip).limit(limit)
       .sort({ firstname: 1 })
       .select("firstname lastname ");
-      console.log(Authors);
+      
     if (Authors) {
       res.status(200).json(Authors);
     } else {

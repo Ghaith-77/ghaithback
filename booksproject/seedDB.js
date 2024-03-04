@@ -1,15 +1,25 @@
 let {Books} = require("./modles/book")
-let {dataBooks} = require("./dataBooks")
+let {authe} = require("./modles/auth")
+let {dataBooks,authors} = require("./dataBooks")
 let dbConect = require("./Middlewares/dbConect")
 require("dotenv").config()
 
 dbConect()
-console.log("dataBooks");
-console.log(dataBooks);
  async function  seeddata(){
     try {
         console.log("books sdd");
         await Books.insertMany(dataBooks)
+        console.log("books add");
+        
+    }catch(error){
+        console.log(error);
+        process.exit(1)
+    }
+}
+ async function seedAuthor(){
+    try {
+        console.log("books add");
+        await authe.insertMany(authors)
         console.log("books add");
         
     }catch(error){
@@ -31,6 +41,8 @@ if(process.argv[2] === "-imp"){
 }
 if(process.argv[2]==="-delete"){
     deleteData()
+}else if(process.argv[2]==="-impAuth"){
+    seedAuthor()
 }
 
 

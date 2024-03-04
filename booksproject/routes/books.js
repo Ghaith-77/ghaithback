@@ -13,13 +13,21 @@ let { Books } = require("../modles/book");
  
 */
 
-router.get("/",logger, async (req, res) => {
-    let books = await Books.find().populate('auth')
-    if (books) {
+router.get("/", async (req, res) => {
+  let {minlenght,maxlenght} = req.query
+  let books;
+  if(minlenght && maxlenght){
+    books = await Books.find({price:{$gte:minlenght,$lte:maxlenght}}).populate('author',[
+      "firstname","lastname","_id"
+    ])
+  }else{
+    books = await Books.find().populate('author',[
+      "firstname","lastname","_id"
+    ])
+  }
+    
+    console.log(books);
       res.status(200).json(books);
-    } else {
-      res.status(400).send({ mas: "books not found" });
-    }
 });
 
 router.get("/:id", async (req, res) => {
@@ -45,7 +53,7 @@ router.post(
       let book = new Books();
       book.title = req.body.title;
       book.descripion = req.body.descripion;
-      book.auth = req.body.auth
+      book.author = req.body.author
       book.cover = req.body.cover;
       book.price =  req.body.price;
       book.save();
@@ -67,7 +75,7 @@ router.put("/:id", async (req, res) => {
           description: req.body.lastname,
           cover: req.body.nashunality,
           price: req.body.img,
-          auth: req.body.auth
+          author: req.body.author
         },
       },
       { new: true }
@@ -93,10 +101,3 @@ router.delete("/:id", async (req, res) => {
 
 
 module.exports = router;
-// {
-//   "title" : "fdsf",
-//   "descripion" : "ghaith",
-//   "auther" : "ghaith",
-//   "cover" : "hardcover",
-//   "price":100
-// }
