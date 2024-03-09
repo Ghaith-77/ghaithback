@@ -14,6 +14,7 @@ let {
 router.post(
   "/register",
   asyncH(async (req, res) => {
+    console.log("fd");
     let { error } = validateRegisterusers(req.body);
     if (error) {
       return res.status(400).json({ massege: error.details[0].message });
@@ -22,6 +23,7 @@ router.post(
     if (user) {
       return res.status(400).json({ massege: "user is already registered" });
     }
+    console.log("dsa");
     let salt = await bcryptjs.genSalt(10);
     req.body.password = await bcryptjs.hash(req.body.password, salt);
     let newUser = new usermodel({
