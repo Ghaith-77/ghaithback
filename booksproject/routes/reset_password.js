@@ -26,7 +26,7 @@ router.post(
       expiresIn: "10m",
     });
     let link = `http://localhost:3000/reset-password/reset-password-view/${user._id}/${token}`; // تصحيح في رابط إعادة تعيين كلمة المرور
-
+     console.log("1");
     let transporter = nodemailer.createTransport({
       service: "email",
       auth: {
@@ -34,6 +34,8 @@ router.post(
         pass: process.env.passUser,
       },
     });
+    console.log("1");
+
     let mailoption = {
       from: process.env.emailUser,
       to: user.email,
@@ -45,6 +47,8 @@ router.post(
           </div>
           `,
     };
+    console.log("1");
+
     transporter.sendMail(mailoption,(error,success)=>{
       if(error){
         console.log(error);
@@ -52,6 +56,8 @@ router.post(
         console.log(success);
       }
     })
+    console.log("1");
+
     res.render("link-send")
   })
 );
