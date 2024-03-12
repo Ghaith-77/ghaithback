@@ -18,3 +18,4 @@ router.post("/",(req,res)=>{
     res.status(200).json({massege :"image Uploaded"})
 })
 
+module.exports = router;
