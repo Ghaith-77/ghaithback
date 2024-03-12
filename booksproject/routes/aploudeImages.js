@@ -14,7 +14,7 @@ let storge = multer.diskStorage({
 let upload = multer({storge})
 
 
-router.post("/",(req,res)=>{
+router.post("/",upload.single("img"),(req,res)=>{
     res.status(200).json({massege :"image Uploaded"})
 })
 
