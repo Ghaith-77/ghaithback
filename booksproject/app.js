@@ -22,6 +22,7 @@ app.use("/auth", require("./routes/auth"));
 app.use("/users", require("./routes/users/usersAuth"));
 app.use("/usermethod", require("./routes/users/usermethods"));
 app.use("/reset_password", require("./routes/reset_password"));
+app.use("/uploudImage", require("./routes/aploudeImages"));
 
 app.use(notFound);
 app.use(error);
