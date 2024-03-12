@@ -1,6 +1,6 @@
 const express = require("express");
 const asyncH = require("express-async-handler");
-const { usermodel } = require("../modles/usermodel");
+const { usermodel, validateresetPasssword } = require("../modles/usermodel");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const router = express.Router();
@@ -26,7 +26,7 @@ router.post(
       expiresIn: "10m",
     });
     let link = `http://localhost:3000/reset-password/reset-password-view/${user._id}/${token}`; // تصحيح في رابط إعادة تعيين كلمة المرور
-     console.log("1");
+    console.log("1");
     let transporter = nodemailer.createTransport({
       service: "email",
       auth: {
@@ -49,16 +49,16 @@ router.post(
     };
     console.log("1");
 
-    transporter.sendMail(mailoption,(error,success)=>{
-      if(error){
+    transporter.sendMail(mailoption, (error, success) => {
+      if (error) {
         console.log(error);
-      }else{
+        res.status(400).json({ message: "error" })
+      } else {
         console.log(success);
+        res.render("link-send")
       }
     })
-    console.log("1");
 
-    res.render("link-send")
   })
 );
 
@@ -83,6 +83,10 @@ router.get(
 router.post(
   "/reset-password-view/:userid/:token",
   asyncH(async (req, res) => {
+    let { error } = validateresetPasssword(req.body);
+    if (error) {
+      return res.status(400).json({ massege: error.details[0].message });
+    }
     let user = await usermodel.findById(req.params.userid);
     if (!user) {
       return res.status(404).json({ message: "user not exist" }); // تصحيح الخطأ في الرسالة
