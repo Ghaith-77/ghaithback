@@ -15,7 +15,10 @@ let upload = multer({storge})
 
 
 router.post("/",upload.single("img"),(req,res)=>{
-    res.status(200).json({massege :"image Uploaded"})
+    res.status(200).json({massege :"image Uploaded",})
 })
 
 module.exports = router;
+
+
+// تجربة على boostman
