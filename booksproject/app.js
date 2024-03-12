@@ -1,5 +1,6 @@
 let express = require("express");
 let app = express();
+let path = require("path")
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -14,7 +15,7 @@ let Dbconnect = require("./Middlewares/dbConect");
 Dbconnect();
 
 // app.use(logger)
-
+ app.use(express.static(path.join(__dirname,"images")))// _____________________
 app.set("view engine", "ejs");
 
 app.use("/books", require("./routes/books"));
