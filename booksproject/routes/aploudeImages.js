@@ -5,7 +5,7 @@ let multer = require("multer");
 
 let storge = multer.diskStorage({
     distination : (req,file,cb)=>{
-        cb(null,path.join(__dirname,"images"))
+        cb(null,path.join(__dirname,"../images"))
     },
     filename : (req,file,cb)=>{
         cb(null,new Data().toIsoString().replace(/:/g,"_")+file.originalname)
