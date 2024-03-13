@@ -1,6 +1,6 @@
 let mongoose = require("mongoose");
 let joi = require("joi");
-
+let jPC = require("joi-password-complexity")
 let schema_user = mongoose.Schema(
   {
     username: {
@@ -39,6 +39,7 @@ module.exports = {
   validatePutusers,
   validateLoginusers,
   validateRegisterusers,
+  validateresetPasssword
 };
 function validateLoginusers(obj) {
   let schema = joi.object({
@@ -47,11 +48,18 @@ function validateLoginusers(obj) {
   });
   return schema.validate(obj);
 }
+
+function validateresetPasssword(obj) {
+  let schema = joi.object({
+    password: joi.string().trim().required(),
+  });
+  return schema.validate(obj);
+}
 function validateRegisterusers(obj) {
   let schema = joi.object({
     username: joi.string().trim().required(),
     email: joi.string().trim().required(),
-    password: joi.string().trim().required(),
+    password: jPC().required(),
   });
   return schema.validate(obj);
 }

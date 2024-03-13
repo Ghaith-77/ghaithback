@@ -1,6 +1,6 @@
 const express = require("express");
 const asyncH = require("express-async-handler");
-const { usermodel } = require("../modles/usermodel");
+const { usermodel, validateresetPasssword } = require("../modles/usermodel");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const router = express.Router();
@@ -50,14 +50,15 @@ router.post(
     console.log("1");
 
     transporter.sendMail(mailoption, (error, success) => {
-      if (error) {s
+      if (error) {
         console.log(error);
-        res.status(200).json({ massegge: "error" });
+        res.status(400).json({ message: "error" })
       } else {
         console.log(success);
-        res.render("link-send");
+        res.render("link-send")
       }
-    });
+    })
+
   })
 );
 
@@ -82,6 +83,10 @@ router.get(
 router.post(
   "/reset-password-view/:userid/:token",
   asyncH(async (req, res) => {
+    let { error } = validateresetPasssword(req.body);
+    if (error) {
+      return res.status(400).json({ massege: error.details[0].message });
+    }
     let user = await usermodel.findById(req.params.userid);
     if (!user) {
       return res.status(404).json({ message: "user not exist" }); // تصحيح الخطأ في الرسالة
